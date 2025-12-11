@@ -1,0 +1,248 @@
+{
+  "pv": {
+    "name": "Dexter AI Agent Architecture",
+    "version": "1.0.0"
+  },
+  "nodes": [
+    {
+      "id": "cli",
+      "type": "text",
+      "x": 100,
+      "y": 100,
+      "width": 120,
+      "height": 60,
+      "color": "#4CAF50",
+      "text": "CLI Interface",
+      "pv": {
+        "nodeType": "CLI",
+        "shape": "rectangle"
+      }
+    },
+    {
+      "id": "agent",
+      "type": "text",
+      "x": 300,
+      "y": 100,
+      "width": 120,
+      "height": 60,
+      "color": "#2196F3",
+      "text": "AI Agent",
+      "pv": {
+        "nodeType": "Agent",
+        "shape": "rectangle"
+      }
+    },
+    {
+      "id": "task-planner",
+      "type": "text",
+      "x": 200,
+      "y": 250,
+      "width": 120,
+      "height": 60,
+      "color": "#FF9800",
+      "text": "Task Planner",
+      "pv": {
+        "nodeType": "TaskPlanner",
+        "shape": "rectangle"
+      }
+    },
+    {
+      "id": "task-executor",
+      "type": "text",
+      "x": 400,
+      "y": 250,
+      "width": 120,
+      "height": 60,
+      "color": "#9C27B0",
+      "text": "Task Executor",
+      "pv": {
+        "nodeType": "TaskExecutor",
+        "shape": "rectangle"
+      }
+    },
+    {
+      "id": "answer-generator",
+      "type": "text",
+      "x": 600,
+      "y": 250,
+      "width": 120,
+      "height": 60,
+      "color": "#F44336",
+      "text": "Answer Generator",
+      "pv": {
+        "nodeType": "AnswerGenerator",
+        "shape": "rectangle"
+      }
+    },
+    {
+      "id": "llm",
+      "type": "text",
+      "x": 300,
+      "y": 400,
+      "width": 120,
+      "height": 60,
+      "color": "#00BCD4",
+      "text": "Language Model",
+      "pv": {
+        "nodeType": "LLM",
+        "shape": "circle"
+      }
+    },
+    {
+      "id": "finance-tools",
+      "type": "text",
+      "x": 150,
+      "y": 400,
+      "width": 120,
+      "height": 60,
+      "color": "#795548",
+      "text": "Finance Tools",
+      "pv": {
+        "nodeType": "FinanceTools",
+        "shape": "hexagon"
+      }
+    },
+    {
+      "id": "search-tools",
+      "type": "text",
+      "x": 450,
+      "y": 400,
+      "width": 120,
+      "height": 60,
+      "color": "#607D8B",
+      "text": "Search Tools",
+      "pv": {
+        "nodeType": "SearchTools",
+        "shape": "hexagon"
+      }
+    },
+    {
+      "id": "message-history",
+      "type": "text",
+      "x": 600,
+      "y": 100,
+      "width": 120,
+      "height": 60,
+      "color": "#FFC107",
+      "text": "Message History",
+      "pv": {
+        "nodeType": "MessageHistory",
+        "shape": "rectangle"
+      }
+    },
+    {
+      "id": "config",
+      "type": "text",
+      "x": 100,
+      "y": 250,
+      "width": 120,
+      "height": 60,
+      "color": "#9E9E9E",
+      "text": "Configuration",
+      "pv": {
+        "nodeType": "Config",
+        "shape": "diamond"
+      }
+    }
+  ],
+  "edges": [
+    {
+      "id": "cli-agent",
+      "fromNode": "cli",
+      "toNode": "agent",
+      "color": "#2196F3",
+      "label": "orchestrates"
+    },
+    {
+      "id": "agent-planner",
+      "fromNode": "agent",
+      "toNode": "task-planner",
+      "color": "#FF9800",
+      "label": "delegates"
+    },
+    {
+      "id": "agent-executor",
+      "fromNode": "agent",
+      "toNode": "task-executor",
+      "color": "#FF9800",
+      "label": "delegates"
+    },
+    {
+      "id": "agent-answer",
+      "fromNode": "agent",
+      "toNode": "answer-generator",
+      "color": "#FF9800",
+      "label": "delegates"
+    },
+    {
+      "id": "planner-llm",
+      "fromNode": "task-planner",
+      "toNode": "llm",
+      "color": "#4CAF50",
+      "label": "uses"
+    },
+    {
+      "id": "executor-llm",
+      "fromNode": "task-executor",
+      "toNode": "llm",
+      "color": "#4CAF50",
+      "label": "uses"
+    },
+    {
+      "id": "answer-llm",
+      "fromNode": "answer-generator",
+      "toNode": "llm",
+      "color": "#4CAF50",
+      "label": "uses"
+    },
+    {
+      "id": "executor-finance",
+      "fromNode": "task-executor",
+      "toNode": "finance-tools",
+      "color": "#9C27B0",
+      "label": "queries"
+    },
+    {
+      "id": "executor-search",
+      "fromNode": "task-executor",
+      "toNode": "search-tools",
+      "color": "#9C27B0",
+      "label": "queries"
+    },
+    {
+      "id": "cli-history",
+      "fromNode": "cli",
+      "toNode": "message-history",
+      "color": "#F44336",
+      "label": "stores"
+    },
+    {
+      "id": "agent-history",
+      "fromNode": "agent",
+      "toNode": "message-history",
+      "color": "#F44336",
+      "label": "stores"
+    },
+    {
+      "id": "cli-config",
+      "fromNode": "cli",
+      "toNode": "config",
+      "color": "#607D8B",
+      "label": "configures"
+    },
+    {
+      "id": "agent-config",
+      "fromNode": "agent",
+      "toNode": "config",
+      "color": "#607D8B",
+      "label": "configures"
+    },
+    {
+      "id": "cli-stream",
+      "fromNode": "agent",
+      "toNode": "cli",
+      "color": "#00BCD4",
+      "label": "streams"
+    }
+  ]
+}

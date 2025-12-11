@@ -1,0 +1,99 @@
+version: "1.0.0"
+name: "Dexter AI Agent Architecture"
+
+nodeComponents:
+  CLI:
+    description: "Main CLI application entry point"
+    icon: "🖥️"
+    color: "#4CAF50"
+    shape: "rectangle"
+    
+  Agent:
+    description: "Main AI agent orchestrator"
+    icon: "🤖"
+    color: "#2196F3"
+    shape: "rectangle"
+    
+  TaskPlanner:
+    description: "Plans and breaks down tasks into subtasks"
+    icon: "📋"
+    color: "#FF9800"
+    shape: "rectangle"
+    
+  TaskExecutor:
+    description: "Executes planned tasks using available tools"
+    icon: "⚡"
+    color: "#9C27B0"
+    shape: "rectangle"
+    
+  AnswerGenerator:
+    description: "Generates final answers from task results"
+    icon: "💡"
+    color: "#F44336"
+    shape: "rectangle"
+    
+  LLM:
+    description: "Language model interface"
+    icon: "🧠"
+    color: "#00BCD4"
+    shape: "circle"
+    
+  FinanceTools:
+    description: "Financial data analysis tools"
+    icon: "📊"
+    color: "#795548"
+    shape: "hexagon"
+    
+  SearchTools:
+    description: "Web search capabilities"
+    icon: "🔍"
+    color: "#607D8B"
+    shape: "hexagon"
+    
+  MessageHistory:
+    description: "Conversation history management"
+    icon: "📚"
+    color: "#FFC107"
+    shape: "rectangle"
+    
+  Config:
+    description: "Configuration and settings management"
+    icon: "⚙️"
+    color: "#9E9E9E"
+    shape: "diamond"
+
+edgeComponents:
+  orchestrates:
+    description: "Orchestrates and manages"
+    style: "solid"
+    color: "#2196F3"
+    
+  delegates:
+    description: "Delegates work to"
+    style: "dashed"
+    color: "#FF9800"
+    
+  uses:
+    description: "Uses for processing"
+    style: "dotted"
+    color: "#4CAF50"
+    
+  queries:
+    description: "Queries for data"
+    style: "solid"
+    color: "#9C27B0"
+    
+  stores:
+    description: "Stores data in"
+    style: "solid"
+    color: "#F44336"
+    
+  configures:
+    description: "Configures behavior"
+    style: "dotted"
+    color: "#607D8B"
+    
+  streams:
+    description: "Streams data to"
+    style: "solid"
+    color: "#00BCD4"
