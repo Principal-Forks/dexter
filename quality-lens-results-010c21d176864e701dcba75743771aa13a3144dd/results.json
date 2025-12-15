@@ -1,0 +1,88 @@
+{
+  "metadata": {
+    "timestamp": "2025-12-15T00:27:04.124Z",
+    "version": "1.0.0",
+    "totalPackages": 1,
+    "totalLenses": 2,
+    "git": {
+      "commit": "010c21d176864e701dcba75743771aa13a3144dd",
+      "branch": "main",
+      "repository": "Principal-Forks/dexter"
+    }
+  },
+  "results": [
+    {
+      "package": {
+        "name": "dexter-ts",
+        "path": ""
+      },
+      "lens": {
+        "id": "typescript",
+        "command": "typecheck"
+      },
+      "execution": {
+        "success": true,
+        "exitCode": 1,
+        "duration": 1418,
+        "timestamp": 1765758413370
+      },
+      "issues": [],
+      "metrics": {
+        "filesAnalyzed": 6,
+        "totalIssues": 0,
+        "issuesBySeverity": {
+          "error": 0,
+          "warning": 0,
+          "info": 0,
+          "hint": 0
+        },
+        "executionTime": 0,
+        "custom": {
+          "filesWithErrors": 0,
+          "totalErrors": 0,
+          "totalWarnings": 0,
+          "totalSuggestions": 0,
+          "uniqueErrorCodes": 0,
+          "topErrors": []
+        }
+      },
+      "fileMetrics": [],
+      "qualityContext": {}
+    },
+    {
+      "package": {
+        "name": "dexter-ts",
+        "path": ""
+      },
+      "lens": {
+        "id": "test",
+        "command": "test"
+      },
+      "execution": {
+        "success": true,
+        "exitCode": 1,
+        "duration": 10752,
+        "timestamp": 1765758424124
+      },
+      "issues": [],
+      "metrics": {},
+      "qualityContext": {}
+    }
+  ],
+  "qualityMetrics": {
+    "packages": [
+      {
+        "name": "dexter-ts",
+        "path": "",
+        "hexagon": {
+          "tests": 0,
+          "deadCode": 0,
+          "formatting": 0,
+          "linting": 0,
+          "types": 100,
+          "documentation": 0
+        }
+      }
+    ]
+  }
+}
