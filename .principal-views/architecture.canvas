@@ -150,6 +150,8 @@
       "id": "cli-agent",
       "fromNode": "cli",
       "toNode": "agent",
+      "fromSide": "right",
+      "toSide": "left",
       "color": "#2196F3",
       "label": "orchestrates"
     },
@@ -157,6 +159,8 @@
       "id": "agent-planner",
       "fromNode": "agent",
       "toNode": "task-planner",
+      "fromSide": "bottom",
+      "toSide": "top",
       "color": "#FF9800",
       "label": "delegates"
     },
@@ -164,6 +168,8 @@
       "id": "agent-executor",
       "fromNode": "agent",
       "toNode": "task-executor",
+      "fromSide": "bottom",
+      "toSide": "top",
       "color": "#FF9800",
       "label": "delegates"
     },
@@ -171,6 +177,8 @@
       "id": "agent-answer",
       "fromNode": "agent",
       "toNode": "answer-generator",
+      "fromSide": "bottom",
+      "toSide": "top",
       "color": "#FF9800",
       "label": "delegates"
     },
@@ -178,6 +186,8 @@
       "id": "planner-llm",
       "fromNode": "task-planner",
       "toNode": "llm",
+      "fromSide": "bottom",
+      "toSide": "top",
       "color": "#4CAF50",
       "label": "uses"
     },
@@ -185,6 +195,8 @@
       "id": "executor-llm",
       "fromNode": "task-executor",
       "toNode": "llm",
+      "fromSide": "bottom",
+      "toSide": "top",
       "color": "#4CAF50",
       "label": "uses"
     },
@@ -192,6 +204,8 @@
       "id": "answer-llm",
       "fromNode": "answer-generator",
       "toNode": "llm",
+      "fromSide": "bottom",
+      "toSide": "top",
       "color": "#4CAF50",
       "label": "uses"
     },
@@ -199,6 +213,8 @@
       "id": "executor-finance",
       "fromNode": "task-executor",
       "toNode": "finance-tools",
+      "fromSide": "bottom",
+      "toSide": "top",
       "color": "#9C27B0",
       "label": "queries"
     },
@@ -206,6 +222,8 @@
       "id": "executor-search",
       "fromNode": "task-executor",
       "toNode": "search-tools",
+      "fromSide": "bottom",
+      "toSide": "top",
       "color": "#9C27B0",
       "label": "queries"
     },
@@ -213,6 +231,8 @@
       "id": "cli-history",
       "fromNode": "cli",
       "toNode": "message-history",
+      "fromSide": "right",
+      "toSide": "left",
       "color": "#F44336",
       "label": "stores"
     },
@@ -220,6 +240,8 @@
       "id": "agent-history",
       "fromNode": "agent",
       "toNode": "message-history",
+      "fromSide": "right",
+      "toSide": "left",
       "color": "#F44336",
       "label": "stores"
     },
@@ -227,6 +249,8 @@
       "id": "cli-config",
       "fromNode": "cli",
       "toNode": "config",
+      "fromSide": "bottom",
+      "toSide": "top",
       "color": "#607D8B",
       "label": "configures"
     },
@@ -234,6 +258,8 @@
       "id": "agent-config",
       "fromNode": "agent",
       "toNode": "config",
+      "fromSide": "left",
+      "toSide": "right",
       "color": "#607D8B",
       "label": "configures"
     },
@@ -241,6 +267,8 @@
       "id": "cli-stream",
       "fromNode": "agent",
       "toNode": "cli",
+      "fromSide": "left",
+      "toSide": "right",
       "color": "#00BCD4",
       "label": "streams"
     }
