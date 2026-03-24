@@ -1,25 +1,22 @@
 import { existsSync, readFileSync, writeFileSync } from 'fs';
 import { config } from 'dotenv';
+import { getProviderById } from '@/providers';
 
 // Load .env on module import
 config({ quiet: true });
 
-// Map model IDs to their required API key environment variable names
-const MODEL_API_KEY_MAP: Record<string, string> = {
-  'gpt-4.1': 'OPENAI_API_KEY',
-  'claude-sonnet-4-5': 'ANTHROPIC_API_KEY',
-  'gemini-3': 'GOOGLE_API_KEY',
-};
+export function getApiKeyNameForProvider(providerId: string): string | undefined {
+  return getProviderById(providerId)?.apiKeyEnvVar;
+}
 
-// Map API key names to user-friendly provider names
-const API_KEY_PROVIDER_NAMES: Record<string, string> = {
-  OPENAI_API_KEY: 'OpenAI',
-  ANTHROPIC_API_KEY: 'Anthropic',
-  GOOGLE_API_KEY: 'Google',
-};
+export function getProviderDisplayName(providerId: string): string {
+  return getProviderById(providerId)?.displayName ?? providerId;
+}
 
-export function getApiKeyName(modelId: string): string | undefined {
-  return MODEL_API_KEY_MAP[modelId];
+export function checkApiKeyExistsForProvider(providerId: string): boolean {
+  const apiKeyName = getApiKeyNameForProvider(providerId);
+  if (!apiKeyName) return true;
+  return checkApiKeyExists(apiKeyName);
 }
 
 export function checkApiKeyExists(apiKeyName: string): boolean {
@@ -92,66 +89,13 @@ export function saveApiKeyToEnv(apiKeyName: string, apiKeyValue: string): boolea
     config({ override: true, quiet: true });
 
     return true;
-  } catch (e) {
-    console.error(`Error saving API key to .env file: ${e}`);
+  } catch {
     return false;
   }
 }
 
-export async function promptForApiKey(apiKeyName: string): Promise<string | null> {
-  const providerName = API_KEY_PROVIDER_NAMES[apiKeyName] || apiKeyName;
-
-  console.log(`\n${providerName} API key is required to continue.`);
-  console.log(`Please enter your ${apiKeyName}:`);
-
-  // Use readline for input
-  const readline = await import('readline');
-  const rl = readline.createInterface({
-    input: process.stdin,
-    output: process.stdout,
-  });
-
-  return new Promise((resolve) => {
-    rl.question('> ', (answer) => {
-      rl.close();
-      const apiKey = answer.trim();
-      if (!apiKey) {
-        console.log('No API key entered. Cancelled.');
-        resolve(null);
-      } else {
-        resolve(apiKey);
-      }
-    });
-  });
+export function saveApiKeyForProvider(providerId: string, apiKey: string): boolean {
+  const apiKeyName = getApiKeyNameForProvider(providerId);
+  if (!apiKeyName) return false;
+  return saveApiKeyToEnv(apiKeyName, apiKey);
 }
-
-export async function ensureApiKeyForModel(modelId: string): Promise<boolean> {
-  const apiKeyName = getApiKeyName(modelId);
-  if (!apiKeyName) {
-    console.log(`Warning: Unknown model '${modelId}', cannot verify API key.`);
-    return false;
-  }
-
-  // Check if API key already exists
-  if (checkApiKeyExists(apiKeyName)) {
-    return true;
-  }
-
-  // Prompt user for API key
-  const providerName = API_KEY_PROVIDER_NAMES[apiKeyName] || apiKeyName;
-  const apiKey = await promptForApiKey(apiKeyName);
-
-  if (!apiKey) {
-    return false;
-  }
-
-  // Save to .env file
-  if (saveApiKeyToEnv(apiKeyName, apiKey)) {
-    console.log(`\n✓ ${providerName} API key saved to .env file`);
-    return true;
-  } else {
-    console.log(`\n✗ Failed to save ${providerName} API key`);
-    return false;
-  }
-}
-
