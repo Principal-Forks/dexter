@@ -1,0 +1,373 @@
+{
+  "id": "dexter-onboarding",
+  "title": "Dexter: AI Financial Research Agent",
+  "description": "A guided tour of Dexter's architecture — from entry point to autonomous agent, tools, memory, skills, and gateway.",
+  "version": "1.0.0",
+  "audience": "New Contributors & AI Assistants",
+  "prerequisites": [
+    "Basic TypeScript knowledge",
+    "Familiarity with LLM agent concepts"
+  ],
+  "steps": [
+    {
+      "id": "step-1-overview",
+      "title": "Welcome to Dexter",
+      "description": "Dexter is an autonomous financial research agent that decomposes complex financial questions into research plans, executes them with real-time market data, and self-validates results. Built with Bun, LangChain, and a terminal UI.",
+      "estimatedTime": 30,
+      "focusDirectory": "",
+      "colorMode": "fileTypes",
+      "interactiveActions": [
+        {
+          "type": "explore",
+          "description": "Take a moment to explore the full codebase layout"
+        }
+      ]
+    },
+    {
+      "id": "step-2-entry-point",
+      "title": "Entry Point & CLI",
+      "description": "The application bootstraps a terminal UI from its main entry point. Separate modules handle command-line argument parsing and configure the available LLM providers — OpenAI, Anthropic, Google, Ollama, and more.",
+      "estimatedTime": 45,
+      "focusDirectory": "src",
+      "colorMode": "fileTypes",
+      "highlightLayers": [
+        {
+          "id": "entry-files",
+          "name": "Entry Point Files",
+          "color": "#3b82f6",
+          "items": [
+            { "path": "src/index.tsx", "type": "file" },
+            { "path": "src/cli.ts", "type": "file" },
+            { "path": "src/providers.ts", "type": "file" },
+            { "path": "src/theme.ts", "type": "file" }
+          ],
+          "opacity": 0.8,
+          "renderStrategy": "fill"
+        }
+      ],
+      "interactiveActions": [
+        {
+          "type": "click-file",
+          "description": "Click the main entry point to see how the app bootstraps",
+          "target": "src/index.tsx"
+        }
+      ]
+    },
+    {
+      "id": "step-3-agent-core",
+      "title": "The Agent Brain",
+      "description": "This is Dexter's brain. The core agent loop handles task planning, tool selection, and self-validation. Supporting modules manage system prompts, a scratchpad that logs every tool call for debugging, and an executor that orchestrates tool invocations.",
+      "estimatedTime": 60,
+      "focusDirectory": "src/agent",
+      "colorMode": "fileTypes",
+      "highlightLayers": [
+        {
+          "id": "agent-core",
+          "name": "Core Agent Logic",
+          "color": "#ef4444",
+          "items": [
+            { "path": "src/agent/agent.ts", "type": "file" },
+            { "path": "src/agent/prompts.ts", "type": "file" },
+            { "path": "src/agent/tool-executor.ts", "type": "file" }
+          ],
+          "opacity": 0.8,
+          "renderStrategy": "fill"
+        },
+        {
+          "id": "agent-support",
+          "name": "Supporting Modules",
+          "color": "#f59e0b",
+          "items": [
+            { "path": "src/agent/scratchpad.ts", "type": "file" },
+            { "path": "src/agent/run-context.ts", "type": "file" },
+            { "path": "src/agent/token-counter.ts", "type": "file" },
+            { "path": "src/agent/channels.ts", "type": "file" }
+          ],
+          "opacity": 0.7,
+          "renderStrategy": "border"
+        }
+      ],
+      "interactiveActions": [
+        {
+          "type": "click-file",
+          "description": "Click the highlighted file to see the core agent loop",
+          "target": "src/agent/agent.ts"
+        }
+      ]
+    },
+    {
+      "id": "step-4-tools",
+      "title": "Tools: How Dexter Acts",
+      "description": "Tools give Dexter its capabilities. Finance is the largest category — covering fundamentals, stock prices, earnings, filings, insider trades, and more. Other categories handle web scraping, web search, HTTP requests, file operations, knowledge storage, and keep-alive signals.",
+      "estimatedTime": 60,
+      "focusDirectory": "src/tools",
+      "colorMode": "fileTypes",
+      "highlightLayers": [
+        {
+          "id": "finance-tools",
+          "name": "Finance Tools",
+          "color": "#10b981",
+          "items": [
+            { "path": "src/tools/finance", "type": "directory" }
+          ],
+          "opacity": 0.7,
+          "renderStrategy": "border"
+        },
+        {
+          "id": "data-tools",
+          "name": "Data Gathering Tools",
+          "color": "#8b5cf6",
+          "items": [
+            { "path": "src/tools/browser", "type": "directory" },
+            { "path": "src/tools/search", "type": "directory" },
+            { "path": "src/tools/fetch", "type": "directory" }
+          ],
+          "opacity": 0.7,
+          "renderStrategy": "border"
+        },
+        {
+          "id": "tool-registry",
+          "name": "Tool Registry",
+          "color": "#f59e0b",
+          "items": [
+            { "path": "src/tools/registry.ts", "type": "file" },
+            { "path": "src/tools/index.ts", "type": "file" }
+          ],
+          "opacity": 0.8,
+          "renderStrategy": "fill"
+        }
+      ],
+      "interactiveActions": [
+        {
+          "type": "hover-directory",
+          "description": "Hover over the finance directory to see all financial data tools",
+          "target": "src/tools/finance"
+        }
+      ]
+    },
+    {
+      "id": "step-5-memory",
+      "title": "Memory System",
+      "description": "Dexter has a persistent memory system backed by SQLite with full-text search. The core layer handles chunking documents, generating embeddings, indexing, and semantic search. A separate tool interface exposes memory as a capability the agent can invoke during conversations.",
+      "estimatedTime": 45,
+      "focusDirectory": "src/memory",
+      "colorMode": "fileTypes",
+      "highlightLayers": [
+        {
+          "id": "memory-core",
+          "name": "Memory Core",
+          "color": "#06b6d4",
+          "items": [
+            { "path": "src/memory", "type": "directory" }
+          ],
+          "opacity": 0.7,
+          "renderStrategy": "border"
+        },
+        {
+          "id": "memory-tool",
+          "name": "Memory Tool Interface",
+          "color": "#8b5cf6",
+          "items": [
+            { "path": "src/tools/memory", "type": "directory" }
+          ],
+          "opacity": 0.7,
+          "renderStrategy": "border"
+        }
+      ],
+      "interactiveActions": [
+        {
+          "type": "click-file",
+          "description": "Click the database module to see SQLite-backed storage",
+          "target": "src/memory/database.ts"
+        }
+      ]
+    },
+    {
+      "id": "step-6-skills",
+      "title": "Skills: Complex Workflows",
+      "description": "Skills are higher-level workflows that compose multiple tools. One performs discounted cash flow analysis, another conducts research via X/Twitter. A loader and registry wire them into the agent at startup.",
+      "estimatedTime": 45,
+      "focusDirectory": "src/skills",
+      "colorMode": "fileTypes",
+      "highlightLayers": [
+        {
+          "id": "skill-modules",
+          "name": "Skill Modules",
+          "color": "#ec4899",
+          "items": [
+            { "path": "src/skills/dcf", "type": "directory" },
+            { "path": "src/skills/x-research", "type": "directory" }
+          ],
+          "opacity": 0.7,
+          "renderStrategy": "border"
+        },
+        {
+          "id": "skill-infra",
+          "name": "Skill Infrastructure",
+          "color": "#f59e0b",
+          "items": [
+            { "path": "src/skills/registry.ts", "type": "file" },
+            { "path": "src/skills/loader.ts", "type": "file" }
+          ],
+          "opacity": 0.8,
+          "renderStrategy": "fill"
+        }
+      ],
+      "interactiveActions": [
+        {
+          "type": "hover-directory",
+          "description": "Hover over the DCF skill to see its structure",
+          "target": "src/skills/dcf"
+        }
+      ]
+    },
+    {
+      "id": "step-7-gateway",
+      "title": "Gateway: WhatsApp & Channels",
+      "description": "The gateway enables Dexter to communicate over external channels like WhatsApp. It includes session management, message routing, access control, group chat support, and a heartbeat system.",
+      "estimatedTime": 45,
+      "focusDirectory": "src/gateway",
+      "colorMode": "fileTypes",
+      "highlightLayers": [
+        {
+          "id": "gateway-core",
+          "name": "Gateway Core",
+          "color": "#22c55e",
+          "items": [
+            { "path": "src/gateway/gateway.ts", "type": "file" },
+            { "path": "src/gateway/agent-runner.ts", "type": "file" },
+            { "path": "src/gateway/config.ts", "type": "file" }
+          ],
+          "opacity": 0.8,
+          "renderStrategy": "fill"
+        },
+        {
+          "id": "gateway-subsystems",
+          "name": "Gateway Subsystems",
+          "color": "#64748b",
+          "items": [
+            { "path": "src/gateway/routing", "type": "directory" },
+            { "path": "src/gateway/sessions", "type": "directory" },
+            { "path": "src/gateway/channels", "type": "directory" },
+            { "path": "src/gateway/group", "type": "directory" }
+          ],
+          "opacity": 0.6,
+          "renderStrategy": "border"
+        }
+      ],
+      "interactiveActions": [
+        {
+          "type": "click-file",
+          "description": "Click the gateway orchestrator to see how channels connect",
+          "target": "src/gateway/gateway.ts"
+        }
+      ]
+    },
+    {
+      "id": "step-8-ui-and-evals",
+      "title": "Terminal UI & Evaluation Suite",
+      "description": "Dexter's terminal UI includes the chat log, approval prompts, debug panel, and tool event displays. Alongside it, the evaluation framework tests Dexter against financial question datasets using LLM-as-judge scoring.",
+      "estimatedTime": 45,
+      "focusDirectory": "src",
+      "colorMode": "fileTypes",
+      "highlightLayers": [
+        {
+          "id": "ui-components",
+          "name": "Terminal UI",
+          "color": "#a855f7",
+          "items": [
+            { "path": "src/components", "type": "directory" }
+          ],
+          "opacity": 0.7,
+          "renderStrategy": "border"
+        },
+        {
+          "id": "eval-suite",
+          "name": "Evaluation Suite",
+          "color": "#f97316",
+          "items": [
+            { "path": "src/evals", "type": "directory" }
+          ],
+          "opacity": 0.7,
+          "renderStrategy": "border"
+        }
+      ],
+      "interactiveActions": [
+        {
+          "type": "hover-directory",
+          "description": "Hover over components to see the terminal UI modules",
+          "target": "src/components"
+        }
+      ]
+    },
+    {
+      "id": "step-9-config",
+      "title": "Configuration & Infrastructure",
+      "description": "Root-level configuration ties everything together — scripts for starting, developing, and testing; TypeScript compiler settings; linting and formatting rules; and environment variable templates documenting every required API key.",
+      "estimatedTime": 30,
+      "focusDirectory": "",
+      "colorMode": "fileTypes",
+      "highlightLayers": [
+        {
+          "id": "config-files",
+          "name": "Configuration",
+          "color": "#6366f1",
+          "items": [
+            { "path": "package.json", "type": "file" },
+            { "path": "tsconfig.json", "type": "file" },
+            { "path": "eslint.config.js", "type": "file" },
+            { "path": "jest.config.js", "type": "file" },
+            { "path": "env.example", "type": "file" }
+          ],
+          "opacity": 0.8,
+          "renderStrategy": "fill"
+        }
+      ],
+      "interactiveActions": [
+        {
+          "type": "click-file",
+          "description": "Click the environment template to see all configurable API keys",
+          "target": "env.example"
+        }
+      ]
+    },
+    {
+      "id": "step-10-summary",
+      "title": "Architecture at a Glance",
+      "description": "Dexter's architecture flows from the entry point through the agent loop, which dispatches to tools and skills, persists knowledge in memory, and renders output through the terminal UI. The gateway provides external channel access via WhatsApp. Evaluations ensure quality. All financial data is powered by the Financial Datasets API.",
+      "estimatedTime": 30,
+      "focusDirectory": "",
+      "colorMode": "fileTypes",
+      "highlightLayers": [
+        {
+          "id": "architecture-layers",
+          "name": "Core Architecture",
+          "color": "#3b82f6",
+          "items": [
+            { "path": "src/agent", "type": "directory" },
+            { "path": "src/tools", "type": "directory" },
+            { "path": "src/skills", "type": "directory" },
+            { "path": "src/memory", "type": "directory" },
+            { "path": "src/components", "type": "directory" },
+            { "path": "src/gateway", "type": "directory" },
+            { "path": "src/evals", "type": "directory" }
+          ],
+          "opacity": 0.6,
+          "renderStrategy": "border"
+        }
+      ],
+      "interactiveActions": [
+        {
+          "type": "explore",
+          "description": "Explore the codebase freely — you now have a map of the territory"
+        }
+      ]
+    }
+  ],
+  "metadata": {
+    "author": "Principal-Forks",
+    "createdAt": "2026-03-24",
+    "updatedAt": "2026-03-24",
+    "tags": ["onboarding", "architecture", "financial-research", "ai-agent"]
+  }
+}
